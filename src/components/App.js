@@ -65,7 +65,9 @@ export default class App extends Component {
               props=>(
                   <UserProfile 
                   {...props}
-                  getUser={this.getUser}></UserProfile>
+                  getUser={this.getUser}
+                  user={this.state.user}
+                  loading={this.state.loading}></UserProfile>
               )
             }></Route>
             <Route component={NotFound}></Route>
