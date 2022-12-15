@@ -41,6 +41,9 @@ class Search extends Component {
                 <button  type='submit' className="btn btn-warning inpput-group-append">Search</button>
             </div>
          </form> 
+         {this.props.swichclrsrchbtn &&
+         <button className="btn btn-danger mt-2" onClick={this.props.clearSearch}>Clear</button>
+         }
       
       </div>
     )

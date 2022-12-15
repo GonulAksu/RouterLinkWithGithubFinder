@@ -14,6 +14,7 @@ export default class App extends Component {
         super(props);
         this.UserSearch=this.UserSearch.bind(this);
         this.getUser=this.getUser.bind(this);
+        this.clearSearch=this.clearSearch.bind(this);
         this.state={
             users:[],
             loading:false,
@@ -43,6 +44,9 @@ export default class App extends Component {
         }, 1000);
     }
 
+    clearSearch() {
+        this.setState({users:[]})
+    }
   render() {
     return (
       <BrowserRouter>
@@ -52,7 +56,10 @@ export default class App extends Component {
                 props=>(
                   <>
                     {/* aynı dizinde dönecek componentler */}
-                    <Search UserSearch={this.UserSearch}></Search>
+                    <Search UserSearch={this.UserSearch}
+                            clearSearch={this.clearSearch}
+                            swichclrsrchbtn={this.state.users.length>0?true:false}
+                      ></Search>
                     <Users loading={this.state.loading}
                             users={this.state.users}></Users>
 
