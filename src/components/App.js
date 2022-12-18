@@ -15,10 +15,12 @@ export default class App extends Component {
         this.UserSearch=this.UserSearch.bind(this);
         this.getUser=this.getUser.bind(this);
         this.clearSearch=this.clearSearch.bind(this);
+        this.getuserRepos=this.getuserRepos.bind(this);
         this.state={
             users:[],
             loading:false,
-            user:{}
+            user:{},
+            userRepos:[]
         }
     }
     UserSearch(keyword){
@@ -42,6 +44,16 @@ export default class App extends Component {
                 }
               )
         }, 1000);
+    }
+
+    getuserRepos(username){
+        this.setState({loading:true})
+      setTimeout(() => {
+        axios.get(`https://api.github.com/users/${username}/repos`).then((res)=>{
+          
+              this.setState({ userRepos:res.data,loading:false})
+        })
+      }, 1000);
     }
 
     clearSearch() {
@@ -74,6 +86,8 @@ export default class App extends Component {
                   {...props}
                   getUser={this.getUser}
                   user={this.state.user}
+                  userRepos={this.state.userRepos}
+                  getuserRepos={this.getuserRepos}
                   loading={this.state.loading}></UserProfile>
               )
             }></Route>

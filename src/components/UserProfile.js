@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import Loading from './Loading';
+import Repos from './Repos';
 
 export default class UserProfile extends Component {
     // user sayfasında goptofile butonu login parametresini barındırır bizde bu parameterye ulaşacagız,yani route üzerinden ekstra bilgi alacağız
    
     componentDidMount(){
       this.props.getUser(this.props.match.params.login)
+      this.props.getuserRepos(this.props.match.params.login)
       setTimeout(() => {
           console.log(this.props.user)
+          console.log(this.props.userRepos)
       }, 3000);
       }
     
@@ -44,20 +47,22 @@ export default class UserProfile extends Component {
                           blog&&<>
                               <h3>Blog</h3>
                               {blog.includes("http") ? 
-                              <a href={blog} class="link-info">{blog}</a>:
+                              <a href={blog} className="link-info">{blog}</a>:
                                 <p>{blog}</p>
                               }
                           </>
                         }
                         <div>
                           <span className="badge  
-                          badge-primary m-1">Followers:{followers}</span>
-                          <span className="badge  badge-success m-1">Following:{following}</span>
+                          badge-primary m-1">Followers : {followers}</span>
+                          <span className="badge  badge-success m-1">Following : {following}</span>
                           <span className="badge  
-                          badge-warning m-1">Public_Repos:{public_repos}</span>
+                          badge-warning m-1">Public_Repos : {public_repos}</span>
                         </div>
                       </div>
-                      
+                      <ul className="list-group list-group-flush">
+                          <Repos userRepos={this.props.userRepos}></Repos>
+                      </ul>
                     </div>
                   </div>
                 </div>
